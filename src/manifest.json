@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "Preview Merch Size",
     "description": "サイズ表記テキスト(例:H100mm×W148)を選択して右クリックし、「実寸サイズをプレビュー」を選択",
-    "version": "1.0",
+    "version": "1.1",
 
     "icons": {
         "16": "icon16.png"
