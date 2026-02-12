@@ -1,4 +1,4 @@
-# Preview Goods Size
+# Preview Merch Size
 
 サイズ表記テキストを実際の物理サイズで可視化するChrome拡張機能です。
 

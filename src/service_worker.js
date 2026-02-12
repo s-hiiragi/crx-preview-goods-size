@@ -5,7 +5,7 @@ async function sendMessageToActiveTab(message) {
 }
 
 chrome.contextMenus.onClicked.addListener(async(info, tab) => {
-    if (info.menuItemId === "DisplayGoodsSize") {
+    if (info.menuItemId === "DisplayMerchSize") {
         const msg = { selectionText: info.selectionText };
         await sendMessageToActiveTab(msg);
     }
@@ -13,7 +13,7 @@ chrome.contextMenus.onClicked.addListener(async(info, tab) => {
 
 chrome.runtime.onInstalled.addListener((details) => {
     chrome.contextMenus.create({
-        id: "DisplayGoodsSize",
+        id: "DisplayMerchSize",
         title: "実寸サイズをプレビュー",
         contexts: ["selection"]
     });
