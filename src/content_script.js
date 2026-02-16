@@ -22,12 +22,10 @@ const realDevicePixelRatio = getRealDevicePixelRatio();
 
 function parseSizeText(text) {
     const sizePatterns = [
-        /H(?<H>\d+)(?:mm)?[^\d]+W(?<W>\d+)(?:mm)?[^\d]+D(?<D>\d+)mm/,
-        /W(?<W>\d+)(?:mm)?[^\d]+H(?<H>\d+)(?:mm)?[^\d]+D(?<D>\d+)mm/,
-        /(?<H>\d+)(?:mm)?[^\d]+(?<W>\d+)(?:mm)?[^\d]+(?<D>\d+)mm/,
-        /H(?<H>\d+)(?:mm)?[^\d]+W(?<W>\d+)(?:mm)?/,
-        /W(?<W>\d+)(?:mm)?[^\d]+H(?<H>\d+)(?:mm)?/,
-        /(?<H>\d+)(?:mm)?[^\d]+(?<W>\d+)(?:mm)?/,
+        /W(?<W>\d+(?:\.\d+)?)[^.\d]+H(?<H>\d+(?:\.\d+)?)[^.\d]+D(?<D>\d+(?:\.\d+)?)(?<U>mm|cm)?/,
+        /(?<H>\d+(?:\.\d+)?)[^.\d]+(?<W>\d+(?:\.\d+)?)[^.\d]+(?<D>\d+(?:\.\d+)?)(?<U>mm|cm)?/,
+        /W(?<W>\d+(?:\.\d+)?)[^.\d]+H(?<H>\d+(?:\.\d+)?)(?<D>)(?<U>mm|cm)?/,
+        /(?<H>\d+(?:\.\d+)?)[^.\d]+(?<W>\d+(?:\.\d+)?)(?<D>)(?<U>mm|cm)?/,
     ];
 
     let sizeInfo = null;
@@ -36,9 +34,9 @@ function parseSizeText(text) {
         const m = p.exec(text);
         if (m) {
             sizeInfo = {
-                width: m.groups.W,
-                height: m.groups.H,
-                depth: m.groups.D
+                width : Number(m.groups.W) * (m.groups.U === 'cm' ? 10 : 1),
+                height: Number(m.groups.H) * (m.groups.U === 'cm' ? 10 : 1),
+                depth : Number(m.groups.D) * (m.groups.U === 'cm' ? 10 : 1)
             };
             break;
         }
